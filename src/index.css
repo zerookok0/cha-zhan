@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-base font-sans text-ivory antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: rgba(201, 169, 106, 0.26);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #c9a96a;
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0908;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2c2730;
+    border-radius: 99px;
+    border: 3px solid #0b0908;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #443c33;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-8xl px-6 sm:px-9 lg:px-14;
+  }
+
+  /* Vertical layout used for the rotating seal text */
+  .glass {
+    background: linear-gradient(
+      165deg,
+      rgba(30, 26, 22, 0.78) 0%,
+      rgba(14, 12, 10, 0.88) 100%
+    );
+    backdrop-filter: blur(20px) saturate(125%);
+    -webkit-backdrop-filter: blur(20px) saturate(125%);
+    border: 1px solid rgba(242, 235, 224, 0.075);
+  }
+
+  .hairline {
+    border: 1px solid rgba(242, 235, 224, 0.075);
+  }
+
+  .text-gold {
+    background: linear-gradient(
+      104deg,
+      #f6efe1 0%,
+      #e4d3b2 26%,
+      #c9a96a 58%,
+      #a8843f 84%,
+      #d9c39a 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-[10.5px] font-medium uppercase tracking-[0.32em] text-gold/80;
+  }
+
+  /* Fine gold rule used under section eyebrows */
+  .rule-line {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      rgba(201, 169, 106, 0.55),
+      rgba(201, 169, 106, 0)
+    );
+  }
+
+  /* Reveal-on-scroll primitive */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal[data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  }
+
+  /* Kiln-fire haze behind hero */
+  .kiln-haze {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(196, 86, 42, 0.28), transparent 55%),
+      radial-gradient(circle at 78% 42%, rgba(201, 169, 106, 0.22), transparent 58%);
+  }
+
+  /* Crazing (ice-crackle) glaze texture */
+  .crazing {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cg fill='none' stroke='%23F2EBE0' stroke-width='0.5' opacity='0.22'%3E%3Cpath d='M0 60l42-24 38 30 46-22 52 34 62-20'/%3E%3Cpath d='M12 150l36 26 30-34 44 22 40-30 58 26'/%3E%3Cpath d='M60 0l-8 52 34 28-18 46 30 38-14 76'/%3E%3Cpath d='M170 0l14 48-30 34 22 52-26 44 8 62'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* Thin hairline that fades at both ends */
+  .fade-rule {
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(242, 235, 224, 0.14) 18%,
+      rgba(242, 235, 224, 0.14) 82%,
+      transparent
+    );
+  }
+
+  .seal {
+    @apply grid place-items-center border border-gold/35 text-gold;
+  }
+}
+
+@layer utilities {
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 10%,
+      #000 90%,
+      transparent
+    );
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, #000 60%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  .vertical-zh {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+  }
+
+  .tracking-luxe {
+    letter-spacing: 0.42em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

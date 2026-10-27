@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { ArrowRight, ShieldCheck, Truck, Trash2, X } from 'lucide-react'
 import type { Bowl } from '../lib/data'
-import { BowlArt } from './BowlArt'
+import { BowlVisual } from './BowlVisual'
 
 type BagDrawerProps = {
   open: boolean
@@ -108,7 +108,12 @@ export function BagDrawer({
                   className="flex gap-3 rounded-xl border border-ivory/[0.07] bg-surface/40 p-3"
                 >
                   <div className="w-16 shrink-0 rounded-lg bg-void/60">
-                    <BowlArt bowl={bowl} className="aspect-square w-full" interactive={false} shadow={false} />
+                    <BowlVisual
+                      bowl={bowl}
+                      className="aspect-square w-full"
+                      interactive={false}
+                      shadow={false}
+                    />
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col justify-between py-0.5">
                     <div className="flex items-start justify-between gap-2">

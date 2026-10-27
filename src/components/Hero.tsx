@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUpRight, Flame, Minus, ShieldCheck, Sparkles } from 'lucide-react'
-import { BowlArt } from './BowlArt'
+import { BowlVisual, canSpinBowl } from './BowlVisual'
 import { Reveal } from './Reveal'
 import { FEATURED, KILN_MARKS, STATS } from '../lib/data'
 
@@ -8,6 +8,7 @@ type HeroProps = {
 }
 
 export function Hero({ onInspect }: HeroProps) {
+  const featuredSpin = canSpinBowl(FEATURED)
   return (
     <section
       id="top"
@@ -134,13 +135,13 @@ export function Hero({ onInspect }: HeroProps) {
               </div>
 
               <div className="relative">
-                <BowlArt bowl={FEATURED} className="aspect-square w-full" spinable />
+                <BowlVisual bowl={FEATURED} className="aspect-square w-full" spinable={featuredSpin} />
 
                 {/* interaction hint */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-2 flex justify-center">
                   <span className="inline-flex items-center gap-2 rounded-full border border-ivory/10 bg-void/40 px-3.5 py-1.5 text-[10.5px] tracking-[0.22em] text-ivory/40 backdrop-blur-sm">
                     <span className="h-1 w-1 animate-pulse rounded-full bg-gold/80" />
-                    按住左右拖 · 把盏转一圈
+                    {featuredSpin ? '按住左右拖 · 把盏转一圈' : '点开放大 · 换个光照看看'}
                   </span>
                 </div>
               </div>

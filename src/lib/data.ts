@@ -36,6 +36,17 @@ export type Bowl = {
   kiln: string
   firing: string
   artist: string
+  /**
+   * 白底实拍图。把图片放进 public/products/ 后填 '/products/yelan.jpg' 即可。
+   * 留空则使用代码绘制的盏。图片加载失败也会自动退回绘制版，不会破版。
+   */
+  photo?: string
+  /**
+   * 可选：同一只盏的多个角度（3–12 张最好）。
+   * 给了两张以上，详情页就能按住左右拖换视角，等价于「转了一圈」。
+   * 只有 photo 一张时，页面不会假装能转 —— 改用视差高光。
+   */
+  photos?: string[]
   glaze: Glaze
   /** short line shown on the card */
   line: string

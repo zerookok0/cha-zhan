@@ -11,7 +11,7 @@ import {
   X,
 } from 'lucide-react'
 import type { Bowl } from '../lib/data'
-import { BowlArt } from './BowlArt'
+import { BowlVisual, canSpinBowl } from './BowlVisual'
 
 type LightMode = 'daylight' | 'candle' | 'studio'
 
@@ -56,6 +56,7 @@ export function BowlDetail({ bowl, onClose, inBag, onToggleBag }: BowlDetailProp
 
   const open = Boolean(bowl)
   const current = LIGHT_MODES.find((m) => m.id === light) ?? LIGHT_MODES[0]
+  const spin = bowl ? canSpinBowl(bowl) : false
 
   return (
     <div
@@ -111,19 +112,20 @@ export function BowlDetail({ bowl, onClose, inBag, onToggleBag }: BowlDetailProp
                   className="pointer-events-none absolute inset-x-10 top-8 h-[60%] rounded-[50%] blur-3xl transition-colors duration-700"
                   style={{ background: current.tint }}
                 />
-                <BowlArt
+                <BowlVisual
                   bowl={bowl}
                   className="relative aspect-square w-full"
-                  spinable
+                  spinable={spin}
                   glow={current.glow}
                   onSpin={setTurn}
+                  overlay={current.tint}
                 />
 
-                {/* turn readout */}
+                {/* turn readout —— 只有真能转时才显示角度 */}
                 <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-1.5 rounded-full border border-ivory/10 bg-void/55 px-2.5 py-1 backdrop-blur-sm">
                   <RotateCcw className="h-2.5 w-2.5 text-gold/60" strokeWidth={2} />
                   <span className="tnum text-[9.5px] tracking-[0.16em] text-ivory/45">
-                    {Math.round(((turn % 360) + 360) % 360)}°
+                    {spin ? `${Math.round(((turn % 360) + 360) % 360)}°` : '正面'}
                   </span>
                 </div>
 

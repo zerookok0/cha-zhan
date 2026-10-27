@@ -3,7 +3,7 @@ import { ArrowUpRight, Flame, Quote, ShieldCheck, Sparkles } from 'lucide-react'
 import { Reveal } from './Reveal'
 import { KilnDiagram } from './KilnDiagram'
 import { ARTISAN, BOWLS, CRAFT_STEPS, FAQS, TESTIMONIALS, TIERS } from '../lib/data'
-import { BowlArt } from './BowlArt'
+import { BowlVisual } from './BowlVisual'
 
 /* ───────────────────────── 窑口 ───────────────────────── */
 export function KilnSection({ onInspect }: { onInspect: () => void }) {
@@ -426,7 +426,7 @@ export function FaqSection() {
             </p>
 
             <div className="mt-10 hidden lg:block">
-              <BowlArt bowl={BOWLS[4]} className="aspect-square w-full max-w-[19rem]" shadow={false} />
+              <BowlVisual bowl={BOWLS[4]} className="aspect-square w-full max-w-[19rem]" shadow={false} />
             </div>
           </Reveal>
 

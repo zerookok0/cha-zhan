@@ -1,6 +1,6 @@
 import { Truck, ShieldCheck } from 'lucide-react'
 import type { Bowl } from '../../lib/data'
-import { BowlArt } from '../BowlArt'
+import { BowlVisual } from '../BowlVisual'
 
 type OrderSummaryProps = {
   bowls: Bowl[]
@@ -38,7 +38,7 @@ export function OrderSummary({ bowls, compact = false }: OrderSummaryProps) {
         {bowls.map((bowl) => (
           <li key={bowl.id} className="flex items-center gap-3 px-4 py-3">
             <div className="w-11 shrink-0 rounded-lg bg-void/60">
-              <BowlArt
+              <BowlVisual
                 bowl={bowl}
                 className="aspect-square w-full"
                 interactive={false}

@@ -11,6 +11,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* 站内图片都不该被当成可拖拽对象：一旦浏览器接管 drag，
+     收藏区的横向拖动会立刻被打断。 */
+  img {
+    -webkit-user-drag: none;
+  }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -149,6 +155,40 @@
 
   .seal {
     @apply grid place-items-center border border-gold/35 text-gold;
+  }
+
+  /* ── 白底实拍图的展示台 ──
+     把白底照片放在一块暖白的小台面上，而不是直接贴在深色背景里，
+     这样白色不会被读成“缺了一块”，反而像拍卖图录里的产品页。 */
+  .photo-stage {
+    background:
+      radial-gradient(circle at 50% 34%, #fdfbf6 0%, #f4eee2 56%, #e6dccb 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 -26px 44px rgba(126, 106, 74, 0.12),
+      0 18px 40px -22px rgba(0, 0, 0, 0.55);
+  }
+
+  .photo-stage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at 50% 50%,
+      transparent 58%,
+      rgba(80, 62, 40, 0.13) 100%
+    );
+  }
+
+  /* ── 图片层：绝不抢指针、绝不被拖走 ──
+     浏览器默认把 <img> 当可拖拽对象，按下拖动会触发 HTML5 drag 并
+     吃掉 pointer 事件，横向滚动就废了。这一层把两件事都关掉。 */
+  .photo-layer {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
   }
 }
 

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Lock } from 'lucide-react'
 import { BOWLS, type Bowl, type GlazeFamily } from '../lib/data'
-import { BowlArt } from './BowlArt'
+import { BowlVisual, canSpinBowl } from './BowlVisual'
 import { Reveal } from './Reveal'
 
 const FILTERS: Array<'全部' | GlazeFamily> = ['全部', '曜变', '油滴', '兔毫', '柿釉', '灰被']
@@ -144,7 +144,7 @@ export function Collection({ onInspect, inBag, onToggleBag }: CollectionProps) {
               </h2>
               <p className="mt-4 max-w-[36rem] text-[14.5px] leading-[1.95] text-ivory/45">
                 六只盏摆在一条案子上。按住往左右拖，或者用箭头键 ——
-                每只都可以点开放大、换光、转到背面看落款。
+                每只都可以点开放大、换光，把釉色看仔细。
               </p>
             </div>
 
@@ -343,7 +343,7 @@ function ShelfCard({
           className="pointer-events-none absolute inset-x-6 top-10 h-[70%] rounded-[50%] bg-[radial-gradient(ellipse_at_50%_60%,rgba(196,86,42,0.26),transparent_66%)] opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100"
         />
         <div className="relative">
-          <BowlArt
+          <BowlVisual
             bowl={bowl}
             className="aspect-square w-full transition-transform duration-700 group-hover:scale-[1.04]"
           />
@@ -413,7 +413,7 @@ function ShelfCard({
             onClick={open}
             className="group/btn inline-flex items-center gap-1.5 rounded-full border border-ivory/12 px-3.5 py-2 text-[11.5px] tracking-[0.12em] text-ivory/65 transition-all duration-300 hover:border-gold/45 hover:text-gold"
           >
-            {dimmed ? '看来历' : '转一转、看光照'}
+            {dimmed ? '看来历' : canSpinBowl(bowl) ? '转一转、看光照' : '看光照、看细节'}
             <ArrowUpRight
               className="h-3 w-3 transition-transform duration-300 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
               strokeWidth={2}
